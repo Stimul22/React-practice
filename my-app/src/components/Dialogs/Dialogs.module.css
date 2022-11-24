@@ -1,0 +1,25 @@
+
+.dialogs{
+display: grid;
+grid-template-columns: 2fr 10fr;
+padding: 10px;
+}
+
+.dialog{
+    color: white;
+    text-decoration: none;
+}
+
+.dialogsItem a {
+    color: white;
+    text-decoration: none;
+}
+
+.messages{
+   
+    color: white;
+}
+
+.message{
+
+}
