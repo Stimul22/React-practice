@@ -1,35 +1,13 @@
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
-
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT' 
 let initialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPAHiOf76ijbW8VSFsrnQIwR3_hqyHY5f45Q&usqp=CAU',
-    //   fullName: "Eugene",
-    //   followed: true,
-    //   status: "I`m an engineer",
-    //   location: { city: "Vinnitsa", country: "Ukraine" },
-    // },
-    // {
-    //   id: 2,
-    //   photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPAHiOf76ijbW8VSFsrnQIwR3_hqyHY5f45Q&usqp=CAU',
-    //   fullName: "Anastasia",
-    //   followed: false,
-    //   status: "I`m a lawyer",
-    //   location: { city: "Vinnitsa", country: "Ukraine" },
-    // },
-    // {
-    //   id: 3,
-    //   photoUrl: 'https://memepedia.ru/wp-content/uploads/2016/03/large_p19d7nh1hm1i37tnuim11ebqo5c1.jpg',
-    //   fullName: "Illia",
-    //   followed: true,
-    //   status: "I`m a programmer",
-    //   location: { city: "Vinnitsa", country: "Ukraine" },
-    // },
-
-  ],
+  users: [],
+  totalUsersCount: 5,
+  pageSize: 5,
+  currentPage: 1,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -57,22 +35,33 @@ const userReducer = (state = initialState, action) => {
     case SET_USERS:
       return {
         ...state,
-        users: [...state.users, ...action.users],
+        users: action.users,
       };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.currentPage,
+      };
+    case SET_TOTAL_USERS_COUNT: 
+    return {
+      ...state, 
+      totalUsersCount: action.count
+    }  
     default:
       return state;
   }
 };
 
 export const followAC = (userId) => {
-  
   return {
-    type: FOLLOW, userId
+    type: FOLLOW,
+    userId,
   };
 };
 export const unfollowAC = (userId) => {
   return {
-    type:  UNFOLLOW, userId
+    type: UNFOLLOW,
+    userId,
   };
 };
 
@@ -82,5 +71,13 @@ export const setUsersAC = (users) => {
     users,
   };
 };
+
+export const setCurrentPageAC = (currentPage) => {
+  return {type: SET_CURRENT_PAGE, currentPage}
+}
+
+export const setTotalUsersCountAC = (totalUsersCount) => {
+  return {type: SET_TOTAL_USERS_COUNT, count: totalUsersCount}
+}
 
 export default userReducer;
